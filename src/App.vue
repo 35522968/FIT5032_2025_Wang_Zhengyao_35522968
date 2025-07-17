@@ -1,14 +1,30 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import JSON from './components/JSON.vue'
-import Form from './components/Form.vue'
+import { ref } from 'vue';
+import Form from './components/Form.vue';
+
+const users = ref([]);
+
+const handleFormSubmit = (formData) => {
+  users.value.push(formData);
+};
 </script>
 
 <template>
   <main>
-    <!-- <JSON /> -->
-     <Form />
+    <Form @submit="handleFormSubmit" />
+    <div v-if="users.length > 0" class="mt-5">
+      <DataTable :value="users">
+        <Column field="username" header="Username"></Column>
+        <Column field="password" header="Password"></Column>
+        <Column field="isAustralian" header="Australian Resident">
+          <template #body="slotProps">
+            {{ slotProps.data.isAustralian ? 'Yes' : 'No' }}
+          </template>
+        </Column>
+        <Column field="gender" header="Gender"></Column>
+        <Column field="reason" header="Reason"></Column>
+      </DataTable>
+    </div>
   </main>
 </template>
 
