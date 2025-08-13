@@ -6,6 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/FIT5032_2025_Wang_Zhengyao_35522968/',
   plugins: [
     vue(),
     vueDevTools(),
